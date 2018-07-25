@@ -1,15 +1,11 @@
 package com.frederiksen.superjnet;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
-
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * TCP/UDP network manager
@@ -39,10 +35,10 @@ public class Network {
 
     private BiHashMap<Class<? extends RequestPacket>, Class<? extends ResponsePacket>> packetPairs = new BiHashMap<>();
     private HashMap<Class<? extends RequestPacket>, PacketProvider<? super RequestPacket, ? extends ResponsePacket>> providers = new HashMap<>();
-    private final HashMap<Class<? extends Packet>, BiConsumer<Network, ? super Packet>> notificationHandlers = new HashMap<>();
+    private final HashMap<Class<? extends Packet>, BiConsumer<Network, ?>> notificationHandlers = new HashMap<>();
 
     /* streaming */
-    private HashMap<RequestPacket<?>, StreamHandler<?>> downstreams = new HashMap<>();
+    private HashMap<RequestPacket<?>, BiConsumer<Network, ?>> downstreams = new HashMap<>();
     private ArrayList<Upstreamer> upstreams = new ArrayList<>();
 
     /* callbacks */
@@ -257,6 +253,8 @@ public class Network {
      * @param packet packet
      */
     private void receive(Remote remote, Packet packet) {
+        // tag sender
+        packet.sender = remote;
         // logf("Received packet from %s.%n", remote);
         if (packet.getTransactionId() == 0) {
             // notification packet
@@ -335,7 +333,7 @@ public class Network {
                 for (RequestPacket<?> requestPacket : downstreams.keySet()) {
                     if (validateResponse(requestPacket, responsePacket)) {
                         // feed stream with certainty from type checking
-                        feedStream(downstreams.get(requestPacket), responsePacket);
+                        feedHandler(downstreams.get(requestPacket), responsePacket);
                         packetStack.pop();
                         return;
                     }
@@ -355,7 +353,8 @@ public class Network {
         synchronized (notificationHandlers) {
             for (Class<? extends Packet> clazz : notificationHandlers.keySet()) {
                 if (clazz.isInstance(packet)) {
-                    notificationHandlers.get(clazz).accept(this, packet);
+                    feedHandler(notificationHandlers.get(clazz), packet);
+
                 }
             }
         }
@@ -392,15 +391,15 @@ public class Network {
     }
 
     /**
-     * Helper method for safely feeding streams response packets.
+     * Helper method for safely feeding handlers response packets.
      *
-     * @param streamHandler stream handler
+     * @param handler stream handler
      * @param packet response packet
      * @param <T>
      */
     @SuppressWarnings("unchecked")
-    private <T> void feedStream(StreamHandler<T> streamHandler, ResponsePacket packet) {
-        streamHandler.stream((T) packet);
+    private <T> void feedHandler(BiConsumer<Network, T> handler, Packet packet) {
+        handler.accept(this, (T) packet);
     }
 
     /**
@@ -456,7 +455,7 @@ public class Network {
      * @param interval in milliseconds that the remote should send responses
      * @param <T>
      */
-    public <T extends ResponsePacket> void requestStream(Remote remote, RequestPacket<T> request, StreamHandler<T> streamHandler, long interval) {
+    public <T extends ResponsePacket> void requestStream(Remote remote, RequestPacket<T> request, BiConsumer<Network, T> streamHandler, long interval) {
         request.setStreamInterval(interval);
         remote.send(request);
         downstreams.put(request, streamHandler);
@@ -543,7 +542,7 @@ public class Network {
      * @param handler handler
      * @param <T> packet class
      */
-    public <T extends Packet> void setNotificationCallback(Class<T> clazz, BiConsumer<Network, ? super Packet> handler) {
+    public <T extends Packet> void setNotificationCallback(Class<T> clazz, BiConsumer<Network, T> handler) {
         synchronized (notificationHandlers) {
             notificationHandlers.put(clazz, handler);
         }
@@ -555,7 +554,7 @@ public class Network {
      *
      * @param handler handler
      */
-    public void setNotificationCallback(BiConsumer<Network, ? super Packet> handler) {
+    public void setNotificationCallback(BiConsumer<Network, Packet> handler) {
         setNotificationCallback(Packet.class, handler);
     }
 
@@ -987,7 +986,7 @@ public class Network {
      */
     @FunctionalInterface
     public interface StreamHandler<T> {
-        void stream(T response);
+        void stream(Network network, T response);
     }
 
     /**
@@ -1130,7 +1129,8 @@ public class Network {
     public static final int TCP_PROTOCOL = 0;
     public static final int UDP_PROTOCOL = 1;
     public static class Packet implements Serializable {
-        private transient int protocol; /* don't need this going over the network */
+        private transient int protocol;  /* don't need this going over the network */
+        private transient Remote sender; /* or this */
         private int transactionId;
 
         public Packet(int protocol) {
@@ -1155,6 +1155,10 @@ public class Network {
 
         public void setProtocol(int protocol) {
             this.protocol = protocol;
+        }
+
+        public Remote getSender() {
+            return sender;
         }
     }
 

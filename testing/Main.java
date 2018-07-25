@@ -2,8 +2,6 @@ import com.frederiksen.superjnet.Network;
 import com.frederiksen.superjnet.RequestPacket;
 import com.frederiksen.superjnet.ResponsePacket;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 
@@ -56,6 +54,9 @@ public class Main {
         if (IS_SERVER) {
             network.addProvider(RequestName.class, Main::provider);
             network.addProvider(RequestWorld.class, (net, packet) -> new RespondWorld());
+            network.setNotificationCallback(RespondName.class, (net, packet) -> {
+                System.out.printf("Client's name is %s.%n", packet.name);
+            });
 
             try {
                 network.startServer(55555, 55556, 44444);
@@ -69,6 +70,7 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            network.notify(network.getRemoteServer(), new RespondName("Mr. Steve"));
             System.out.println("Requesting name...");
             network.requestStream(network.getRemoteServer(), new RequestWorld(), Main::handleStream, 200);
             //network.requestStream(network.getRemoteServer(), new RequestWorld(), Main::handle2, 500);
@@ -81,6 +83,7 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             System.out.println("Shutting down stream...");
             network.shutdownStream(network.getRemoteServer(), new RequestWorld());
         }
@@ -99,7 +102,7 @@ public class Main {
         return new RespondName("Alex");
     }
 
-    public static void handleStream(RespondWorld responsePacket) {
+    public static void handleStream(Network network, RespondWorld responsePacket) {
         System.out.printf("[Downstream]: Packet %d.%n", responsePacket.count);
     }
 
