@@ -52,8 +52,8 @@ public class Main {
         network.registerPacketPair(RequestWorld.class, RespondWorld.class);
 
         if (IS_SERVER) {
-            network.addProvider(RequestName.class, Main::provider);
-            network.addProvider(RequestWorld.class, (net, packet) -> new RespondWorld());
+            network.setProvider(RequestName.class, Main::provider);
+            network.setProvider(RequestWorld.class, (net, packet) -> new RespondWorld());
             network.setNotificationCallback(RespondName.class, (net, packet) -> {
                 System.out.printf("Client's name is %s.%n", packet.name);
             });

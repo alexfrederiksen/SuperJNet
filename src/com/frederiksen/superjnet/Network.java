@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 /**
  * TCP/UDP network manager
@@ -34,7 +35,7 @@ public class Network {
     private final Stack<Packet> packetStack = new Stack<>();
 
     private BiHashMap<Class<? extends RequestPacket>, Class<? extends ResponsePacket>> packetPairs = new BiHashMap<>();
-    private HashMap<Class<? extends RequestPacket>, PacketProvider<? super RequestPacket, ? extends ResponsePacket>> providers = new HashMap<>();
+    private HashMap<Class<? extends RequestPacket>, BiFunction<Network, ? extends RequestPacket, ? extends ResponsePacket>> providers = new HashMap<>();
     private final HashMap<Class<? extends Packet>, BiConsumer<Network, ?>> notificationHandlers = new HashMap<>();
 
     /* streaming */
@@ -320,7 +321,7 @@ public class Network {
                     return;
                 } else if (providers.containsKey(requestPacket.getClass())) {
                     // fulfill simple request
-                    ResponsePacket responsePacket = providers.get(requestPacket.getClass()).provide(this, requestPacket);
+                    ResponsePacket responsePacket = feedProvider(providers.get(requestPacket.getClass()), requestPacket);
                     responsePacket.setTransactionId(requestPacket.getTransactionId());
                     remote.send(responsePacket);
                     logf("Sent a '%s' to fulfill request.%n", packetPairs.getB(requestPacket.getClass()).getSimpleName());
@@ -403,6 +404,18 @@ public class Network {
     }
 
     /**
+     * Helper method for safely feeding handlers response packets.
+     *
+     * @param handler stream handler
+     * @param packet response packet
+     * @param <T>
+     */
+    @SuppressWarnings("unchecked")
+    private <T, R> R feedProvider(BiFunction<Network, T, R> handler, RequestPacket packet) {
+        return handler.apply(this, (T) packet);
+    }
+
+    /**
      * Executes a given task on its own thread.
      *
      * @param task task
@@ -446,8 +459,8 @@ public class Network {
 
     /**
      * Requests a stream from a given remote. Response packets
-     * will be sent at a set and specified interval and given
-     * to a {@link StreamHandler}.
+     * will be sent at a set and specified interval and given to
+     * handler.
      *
      * @param remote to send request
      * @param request of wanted response
@@ -579,7 +592,7 @@ public class Network {
      * @param provider something that will "provide" responses
      * @param <T>
      */
-    public <T extends RequestPacket> void addProvider(Class<T> clazz, PacketProvider<? super RequestPacket, ? extends ResponsePacket<T>> provider) {
+    public <T extends RequestPacket> void setProvider(Class<T> clazz, BiFunction<Network, T, ResponsePacket<T>> provider) {
         providers.put(clazz, provider);
     }
 
@@ -904,10 +917,6 @@ public class Network {
         }
     }
 
-    public HashMap<Class<? extends RequestPacket>, PacketProvider<? super RequestPacket, ? extends ResponsePacket>> getProviders() {
-        return providers;
-    }
-
     public void setConnectCallback(BiConsumer<Network, Remote> onConnect) {
         this.onConnect = onConnect;
     }
@@ -980,28 +989,6 @@ public class Network {
     }
 
     /**
-     * For handling downstream responses.
-     *
-     * @param <T>
-     */
-    @FunctionalInterface
-    public interface StreamHandler<T> {
-        void stream(Network network, T response);
-    }
-
-    /**
-     * For automatically "providing" responses to remote
-     * requests.
-     *
-     * @param <A> request packet
-     * @param <B> response packet
-     */
-    @FunctionalInterface
-    public interface PacketProvider<A, B extends ResponsePacket> {
-        B provide(Network network, A a);
-    }
-
-    /**
      * Sends responses at a fixed rate as a stream. Can be shared
      * between multiple remotes.
      */
@@ -1031,7 +1018,7 @@ public class Network {
             for (Remote remote : remotes.keySet())
                 logf("[%s]:    %s.%n", this, remote);
             while (!isInterrupted()) {
-                ResponsePacket responsePacket = providers.get(requestPacket.getClass()).provide(network, requestPacket);
+                ResponsePacket responsePacket = feedProvider(providers.get(requestPacket.getClass()), requestPacket);
                 synchronized (remotes) {
                     for (Remote remote : remotes.keySet()) {
                         // tag response with transaction id
