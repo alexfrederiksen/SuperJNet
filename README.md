@@ -11,7 +11,7 @@ Network network = new Network();
 network.startServer(55555, 55556, 22222);
 ```
 
-### Start a Client
+### Starting a Client
 ```java
 Network network = new Network();
 // start a client and connect to "localhost" at TCP port 55555, UDP port 55556
