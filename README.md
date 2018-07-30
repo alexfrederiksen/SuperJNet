@@ -25,7 +25,7 @@ You connect to a server and would like to know its name, so you send a request f
 ```java
 /* in shared network code */
 
-public class RequestName extends RequestPacket<ResponseName> {
+public class RequestName extends RequestPacket<RespondName> {
   private static final long serialVersionUID = ...; // see "Serial Version UID for getting this
   
 }
@@ -35,7 +35,7 @@ public class RespondName extends ResponsePacket<RequestName> {
   public String name;
 }
 ```
-Notice when the packets are extends their corresponding packet types (RequestPacket and ResponsePacket), the class of the associated response or request are withing the brackets. This is important for it allows the two type to be bounded, providing some nice, strong type-checking. However, they need to binded once more in code for safe credibility checking when responses are received. So lets:
+Notice when the packets extend their corresponding packet types (RequestPacket and ResponsePacket), the class of the associated response or request are within the brackets. This is important as it allows the two types to be bounded, providing some nice, strong type-checking. However, they need to binded once more in code for safe credibility checking when responses are received. So lets:
 
 ```java
 /* also in shared network code */
@@ -76,16 +76,16 @@ public void onStreamResponse(Network network RespondStuff response) {
 
 public void setup() {
   // request a stream of responses at a 1000 ms interval, invoking the onStreamResponse() method
-  network.requestStream(<remote>, new RequestStuff(), this::onStreamResponse, 1000); 
+  network.requestStream(remote, new RequestStuff(), this::onStreamResponse, 1000); 
 }
 ```
-Pretty sick huh. If your wondering about the how to get "Remote" objects, know that these are in every response packet through the `getSender()` method and are given to other callbacks like `network.setConnectCallback(<callback method>)`.
+Pretty sick huh. If your wondering about the how to get "Remote" objects, know that these are in every response packet through the `getSender()` method and are given to callbacks like `network.setConnectCallback(<callback method>)`. Read JavaDocs for more.
 
 ### Notifications
 There may be times when you just want to be notified with packets instead of having a whole request and response transaction. You may notify a remote through:
 ```java
 /* notifier's code */
-network.notify(<remote>, new Stuff());
+network.notify(remote, new Stuff());
 ```
 It may be a good idea to be ready for notifications
 ```java
@@ -99,7 +99,7 @@ public void setup() {
   network.setNotificationCallback(Stuff.class, this::onNotifiedWithStuff);
 }
 ```
-Note: for packets like 'Stuff' you may also extend 'Network.Packet' for better readability. Never use 'RequestPacket' to notify.
+Note: for packets like 'Stuff' you may also extend 'Network.Packet' for better readability, since you're not really using the request and response method. Never use 'RequestPacket' to notify. For an explanation why, just read the code. 
 
 ### Cleanup
 Always stop the network when you're done.
