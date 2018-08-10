@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SuperJNet-source">
+    <output-path>$PROJECT_DIR$/out/artifacts/SuperJNet_source</output-path>
+    <root id="archive" name="SuperJNet-source.jar">
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+    </root>
+  </artifact>
+</component>

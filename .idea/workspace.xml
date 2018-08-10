@@ -14,16 +14,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/SuperJNetSources/SuperJNetSources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/SuperJNetSources/SuperJNetSources.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/SuperJNet_jar/SuperJNet.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/SuperJNet_jar/SuperJNet.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$Packet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$Packet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$Remote.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$Remote.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$RemoteAddress.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$RemoteAddress.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$StreamHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$UdpSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$UdpSocket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$Upstreamer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$Upstreamer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/SuperJNet/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/SuperJNet/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/frederiksen/superjnet/Network.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/frederiksen/superjnet/Network.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/testing/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SuperJNet/com/frederiksen/superjnet/Network$PacketProvider.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/SuperJNet/Main$RequestName.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/SuperJNet/Main$RequestName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/SuperJNet/Main$RequestVersion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/SuperJNet/Main$RequestVersion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/SuperJNet/Main$RequestWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/SuperJNet/Main$RequestWorld.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/SuperJNet/Main$RespondName.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/SuperJNet/Main$RespondName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/SuperJNet/Main$RespondVersion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/SuperJNet/Main$RespondVersion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/SuperJNet/Main$RespondWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/SuperJNet/Main$RespondWorld.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="74" column="106" lean-forward="true" selection-start-line="74" selection-start-column="106" selection-end-line="74" selection-end-column="106" />
+            <state relative-caret-position="900">
+              <caret line="62" column="37" lean-forward="true" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,16 +44,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Network.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Network.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/frederiksen/superjnet/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6082">
-              <caret line="828" column="35" selection-start-line="828" selection-start-column="35" selection-end-line="828" selection-end-column="35" />
+            <state relative-caret-position="6180">
+              <caret line="426" selection-start-line="426" selection-end-line="426" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#15859#15889#0" expanded="true" />
-                <element signature="e#16207#16237#0" expanded="true" />
-                <element signature="e#19325#19355#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,7 +77,7 @@
       <file leaf-file-name="InetAddress.java" pinned="false" current-in-tab="false">
         <entry file="jar:///usr/java/jdk1.8.0_171-amd64/src.zip!/java/net/InetAddress.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9360">
+            <state relative-caret-position="9390">
               <caret line="708" column="19" selection-start-line="708" selection-start-column="19" selection-end-line="708" selection-end-column="19" />
               <folding>
                 <element signature="e#25356#25357#0" expanded="true" />
@@ -176,6 +170,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -203,9 +199,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -314,22 +308,27 @@
       <option name="project" value="LOCAL" />
       <updated>1532547061912</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add more flexible callback support">
+      <created>1532556259352</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1532556259352</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32978722" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5005208" side_tool="true" weight="0.3074468" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32978722" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49947917" weight="0.34468085" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
@@ -343,6 +342,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32978722" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -354,7 +354,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update notification functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update notification functionality" />
+    <MESSAGE value="Add more flexible callback support" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add more flexible callback support" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -363,10 +364,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/java/jdk1.8.0_171-amd64/src.zip!/java/lang/Thread.java">
+    <entry file="file://$PROJECT_DIR$/src/com/frederiksen/superjnet/BiHashMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14430">
-          <caret line="962" column="19" selection-start-line="962" selection-start-column="19" selection-end-line="962" selection-end-column="19" />
+        <state relative-caret-position="210">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -391,9 +392,6 @@
           <caret line="4" selection-start-line="4" selection-end-line="4" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15859#15889#0" expanded="true" />
-            <element signature="e#16207#16237#0" expanded="true" />
-            <element signature="e#19325#19355#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -669,7 +667,7 @@
     </entry>
     <entry file="jar:///usr/java/jdk1.8.0_171-amd64/src.zip!/java/net/InetAddress.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9360">
+        <state relative-caret-position="9390">
           <caret line="708" column="19" selection-start-line="708" selection-start-column="19" selection-end-line="708" selection-end-column="19" />
           <folding>
             <element signature="e#25356#25357#0" expanded="true" />
@@ -692,25 +690,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/frederiksen/superjnet/Network.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="74" column="106" lean-forward="true" selection-start-line="74" selection-start-column="106" selection-end-line="74" selection-end-column="106" />
+        <state relative-caret-position="6180">
+          <caret line="426" selection-start-line="426" selection-end-line="426" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/frederiksen/superjnet/Network.java">
+    <entry file="file://$PROJECT_DIR$/testing/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6082">
-          <caret line="828" column="35" selection-start-line="828" selection-start-column="35" selection-end-line="828" selection-end-column="35" />
+        <state relative-caret-position="900">
+          <caret line="62" column="37" lean-forward="true" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#15859#15889#0" expanded="true" />
-            <element signature="e#16207#16237#0" expanded="true" />
-            <element signature="e#19325#19355#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -722,11 +717,11 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="artifact" />
               <type id="library" />
+              <type id="artifact" />
             </show-content>
           </artifact-editor>
-          <last-edited>SuperJNetSources</last-edited>
+          <last-edited>SuperJNet-source</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
